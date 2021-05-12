@@ -13,6 +13,7 @@
 <!-- Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
     	rel="stylesheet">
+    <link href="./resources/css/bootstrap.min.css" />	
 <body>
 	<jsp:include page="menu.jsp" />
 	<div class = "jumbotron">
@@ -31,6 +32,8 @@
 				Product product = listOfProducts.get(i);
 			%>
 			<div class = "col-md-4">
+				<img src="c:/upload/<%=product.getFilename()%>" 
+					alt="<%=product.getFilename()%>" height="280" width="250"/>
 				<h3><%= product.getPname()%></h3>
 				<p><%=product.getDescription() %></p>
 				<p><%=product.getUnitPrice() %>원</p>

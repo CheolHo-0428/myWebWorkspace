@@ -11,6 +11,7 @@
 <!-- Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
     	rel="stylesheet">
+    <link href="./resources/css/bootstrap.min.css" />
     <script src="./resources/js/validation.js"></script>	
 <body>
 	<jsp:include page="menu.jsp"></jsp:include>
@@ -21,7 +22,8 @@
 		</div>
 	</div>
 	<div class="container">
-		<form action="./processAddProduct.jsp" name="newProduct" method="post" class="form-horizontal">
+		<form action="./processAddProduct.jsp" name="newProduct" 
+			method="post" class="form-horizontal" enctype="multipart/form-data">
 			<div class="form-group row">
 				<label class="col-sm-2"><b>상품 코드</b></label> 
 				<div class="col-sm-3">
@@ -71,6 +73,12 @@
 					<input type="radio" name="condition" value="New"> 신규 제품 
 					<input type="radio" name="condition" value="Old"> 중고 제품 
 					<input type="radio" name="condition" value="Refurbished"> 리퍼 제품
+				</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-sm-2"><b>이미지</b></label>
+				<div class="col-sm-3">
+					<input type="file" name="productImage" class="form-control">
 				</div>
 			</div>
 			<div class="form-group row">
