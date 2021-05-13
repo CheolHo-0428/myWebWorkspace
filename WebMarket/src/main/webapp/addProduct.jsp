@@ -27,19 +27,19 @@
 			<div class="form-group row">
 				<label class="col-sm-2"><b>상품 코드</b></label> 
 				<div class="col-sm-3">
-					<input type="text" name="productId" class="form-control">
+					<input type="text" id="productId" name="productId" class="form-control">
 				</div>
 			</div>
 			<div class="form-group row">
 				<label class="col-sm-2"><b>상품명</b></label>
 				<div class="col-sm-2">
-					<input type="text" name="name" class="form-control">
+					<input type="text" id="name" name="name" class="form-control">
 				</div>
 			</div>
 			<div class="form-group row">
 				<label class="col-sm-2"><b>가격</b></label>
 				<div class="col-sm-3">
-					<input type="text" name="unitPrice" class="form-control">
+					<input type="text" id="unitPrice" name="unitPrice" class="form-control">
 				</div>
 			</div>
 			<div class="form-group row">
@@ -64,7 +64,7 @@
 			<div class="form-group row">
 				<label class="col-sm-2"><b>재고 수</b></label>
 				<div class="col-sm-3">
-					<input type="text" name="unitsInStock" class="form-control">
+					<input type="text" id="unitsInStock" name="unitsInStock" class="form-control">
 				</div>
 			</div>
 			<div class="form-group row">
@@ -77,13 +77,13 @@
 			</div>
 			<div class="form-group row">
 				<label class="col-sm-2"><b>이미지</b></label>
-				<div class="col-sm-3">
+				<div class="col-sm-5">
 					<input type="file" name="productImage" class="form-control">
 				</div>
 			</div>
 			<div class="form-group row">
 				<label class="col-sm-offset-2 col-sm-10">
-					<input type="submit" value="등록" class="btn btn-primary">
+					<input type="submit" value="등록" class="btn btn-primary" onclick="CheckAddProduct()">
 				</label>
 			</div>
 		</form>	

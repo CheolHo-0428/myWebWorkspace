@@ -32,7 +32,7 @@
 				Product product = listOfProducts.get(i);
 			%>
 			<div class = "col-md-4">
-				<img src="c:/upload/<%=product.getFilename()%>" 
+				<img src="./resources/images/<%=product.getFilename()%>" 
 					alt="<%=product.getFilename()%>" height="280" width="250"/>
 				<h3><%= product.getPname()%></h3>
 				<p><%=product.getDescription() %></p>

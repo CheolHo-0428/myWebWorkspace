@@ -2,6 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ page import="dto.Book" %>
 <%@ page import="dao.BookRepository" %>
+<%@ page import="com.oreilly.servlet.*" %>
+<%@ page import="com.oreilly.servlet.multipart.*" %>
+<%@ page import="java.util.*" %>
+<%@ page import="java.io.*" %>
 <jsp:useBean id="bookRepo" class="dao.BookRepository" scope="session"></jsp:useBean>
 <!DOCTYPE html>
 <html>
@@ -20,15 +24,19 @@
 		</div>
 	</div>
 	<% 
-		response.setIntHeader("Refresh", 5);
+		response.setIntHeader("Refresh", 100);
 		String id = request.getParameter("id");
 		BookRepository dao = BookRepository.getBookRepositroy();
 		Book book = dao.getBookById(id);
 	%>
 	
 	<div class="container">
-		<div class="column">
-			<div class = "col-md-10">
+		<div class="row" align="left">
+			<div class = "col-md-4">
+				<img src="./resources/images/<%=book.getFilename()%>" alt="<%=book.getFilename()%>"
+						width="100%">
+			</div>
+			<div class = "col-md-6">
 				<h3><%=book.getCategory()%><%=book.getName()%></h3>
 				<p><%=book.getDescription() %> </p>
 				<p><b>도서코드</b> : <span class="badge badge-danger">
@@ -44,8 +52,7 @@
 					<a href="#" class="btn btn-info">도서 주문 &raquo;></a>
 					<a href="./books.jsp" class="btn btn-secondary">도서 목록 &raquo;></a>
 				</p>
-				<br>
-			</div>
+			</div>			
 		</div>
 	</div>
 	

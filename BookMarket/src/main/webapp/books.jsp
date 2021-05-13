@@ -3,6 +3,10 @@
 <%@ page import = "java.util.ArrayList" %>
 <%@ page import = "dto.Book"%>
 <%@ page import = "dao.BookRepository"%>
+<%@ page import = "com.oreilly.servlet.*" %>
+<%@ page import = "com.oreilly.servlet.multipart.*" %>
+<%@ page import = "java.util.*" %>
+<%@ page import = "java.io.*" %>
 <jsp:useBean id="bookDAO" class="dao.BookRepository" scope="page"></jsp:useBean>
 <!DOCTYPE html>
 <html>
@@ -13,6 +17,7 @@
 <!-- Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
     	rel="stylesheet">
+    <link href="./resources/css/bootstrap.min.css" />	
 <body>
 	<jsp:include page="menu.jsp"></jsp:include>
 	
@@ -23,7 +28,7 @@
 	</div>
 	
 	<% 
-		response.setIntHeader("Refresh", 3);
+		response.setIntHeader("Refresh", 100);
 		BookRepository dao = BookRepository.getBookRepositroy();
 		ArrayList<Book> listOfBooks = dao.getAllBooks();
 	%>
@@ -34,6 +39,10 @@
 			%>
 			<div class = "col-md-10">
 				<h3><%=book.getCategory()%><%=book.getName()%></h3><br>
+				<div class = "col-md-5">
+					<img src="./resources/images/<%=book.getFilename()%>" 
+						alt="<%=book.getFilename()%>" width="100%">
+				</div><br>
 				<p><%=book.getDescription() %> </p>
 				<p><%=book.getAuthor()%> | <%=book.getPublisher()%> | <%=book.getUnitPrice()%>원</p>
 				<p><a href="./book.jsp?id=<%=book.getBookId()%>"

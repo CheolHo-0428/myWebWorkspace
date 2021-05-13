@@ -2,6 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ page import = "dao.BookRepository" %>
 <%@ page import = "dto.Book" %>
+<%@ page import = "com.oreilly.servlet.*" %>
+<%@ page import = "com.oreilly.servlet.multipart.*" %>
+<%@ page import = "java.util.*" %>
+<%@ page import = "java.io.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,17 +15,28 @@
 <body>
 	<% 
 		request.setCharacterEncoding("utf-8");
-		String bookId = request.getParameter("bookId");
-		String name = request.getParameter("name");
-		Integer unitPrice = Integer.valueOf(request.getParameter("unitPrice"));
-		String author = request.getParameter("author");
-		String description = request.getParameter("description");
-		String publisher = request.getParameter("publisher");
-		String category = request.getParameter("category");
-		long unitsInStock = Long.valueOf(request.getParameter("unitsInStock"));
-		long totalPages = Long.valueOf(request.getParameter("totalPages"));
-		String releaseDate = request.getParameter("releaseDate");
-		String condition = request.getParameter("condition");
+		String path = "C:\\myJavaDev\\myWebWorkspace\\BookMarket\\src\\main\\webapp\\resources\\images";
+		int maxSize = 5 * 1024 * 1024;
+		String encType = "utf-8";
+		
+		MultipartRequest multi = new MultipartRequest(request, path, 
+				maxSize, encType, new DefaultFileRenamePolicy());
+	
+		String bookId = multi.getParameter("bookId");
+		String name = multi.getParameter("name");
+		Integer unitPrice = Integer.valueOf(multi.getParameter("unitPrice"));
+		String author = multi.getParameter("author");
+		String description = multi.getParameter("description");
+		String publisher = multi.getParameter("publisher");
+		String category = multi.getParameter("category");
+		long unitsInStock = Long.valueOf(multi.getParameter("unitsInStock"));
+		long totalPages = Long.valueOf(multi.getParameter("totalPages"));
+		String releaseDate = multi.getParameter("releaseDate");
+		String condition = multi.getParameter("condition");
+		
+		Enumeration eumList = multi.getFileNames();
+		String paramName = (String) eumList.nextElement();
+		String fileName = multi.getFilesystemName(paramName);
 		
 		BookRepository dao = BookRepository.getBookRepositroy();
 		Book book = new Book();
@@ -36,6 +51,7 @@
 		book.setTotalPages(totalPages);
 		book.setReleaseDate(releaseDate);
 		book.setCondition(condition);
+		book.setFilename(fileName);
 		
 		dao.addBook(book);
 		

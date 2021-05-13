@@ -30,7 +30,7 @@
 		<div class="container">
 			<div class="row">
 				<div class = "col-md-5">
-					<img src="c:/upload/<%=product.getFilename()%>" 
+					<img src="./resources/images/<%=product.getFilename()%>" 
 						alt="<%=product.getFilename()%>" width="100%">
 				</div>
 				<div class = "col-md-6">

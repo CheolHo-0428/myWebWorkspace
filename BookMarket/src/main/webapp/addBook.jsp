@@ -7,8 +7,9 @@
 <title>도서 등록</title>
 </head>
 <!-- Bootstrap CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
-    	rel="stylesheet">
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
+	rel="stylesheet">
+<script type="text/javascript" src="./resources/js/validation.js"></script>
 <body>
 	<jsp:include page="menu.jsp"></jsp:include>
 		<div class = "jumbotron">
@@ -17,23 +18,24 @@
 		</div>
 	</div>
 	<div class="container">
-		<form action="./processAddBook.jsp" name="bookMember" method="post" class="form-horizontal">
+		<form action="./processAddBook.jsp" name="bookMember" 
+			method="post" class="form-horizontal" enctype="multipart/form-data">
 			<div class="form-group row">
 				<label class="col-sm-2"><b>도서 코드</b></label> 
 				<div class="col-sm-3">
-					<input type="text" name="bookId" class="form-control">
+					<input type="text" id="bookId" name="bookId" class="form-control">
 				</div>
 			</div>
 			<div class="form-group row">
 				<label class="col-sm-2"><b>도서명</b></label> 
 				<div class="col-sm-3">
-					<input type="text" name="name" class="form-control">
+					<input type="text" id="name" name="name" class="form-control">
 				</div>
 			</div>
 			<div class="form-group row">
 				<label class="col-sm-2"><b>가격</b></label> 
 				<div class="col-sm-3">
-					<input type="text" name="unitPrice" class="form-control">
+					<input type="text" id="unitPrice" name="unitPrice" class="form-control">
 				</div>
 			</div>
 			<div class="form-group row">
@@ -57,7 +59,7 @@
 			<div class="form-group row">
 				<label class="col-sm-2"><b>재고 수</b></label> 
 				<div class="col-sm-3">
-					<input type="text" name="unitsInStock" class="form-control">
+					<input type="text" id="unitsInStock" name="unitsInStock" class="form-control">
 				</div>
 			</div>
 			<div class="form-group row">
@@ -87,8 +89,14 @@
 				</div>
 			</div>
 			<div class="form-group row">
+				<label class="col-sm-2"><b>이미지</b></label> 
+				<div class="col-sm-3">
+					<input type="file" name="fn" class="form-control">
+				</div>
+			</div>
+			<div class="form-group row">
 				<label class="col-sm-offset-2 col-sm-10">
-					<input type="submit" value="등록" class="btn btn-primary">
+					<input type="submit" value="등록" class="btn btn-primary" onclick="CheckForm()">
 				</label>
 			</div>
 		</form>
