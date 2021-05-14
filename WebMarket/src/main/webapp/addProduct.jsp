@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="dao.ProductRepository" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:useBean id="addProduct" class="dao.ProductRepository" scope="session"></jsp:useBean>
 <!DOCTYPE html>
 <html>
@@ -14,80 +15,90 @@
     <link href="./resources/css/bootstrap.min.css" />
     <script src="./resources/js/validation.js"></script>	
 <body>
+	<fmt:setLocale value='<%= request.getParameter("language") %>'/>
+	<fmt:bundle basename="resourceBundle.message">
+	
 	<jsp:include page="menu.jsp"></jsp:include>
 	
 	<div class = "jumbotron">
 		<div class = "container">
-			<h1 class = "display-3">상품 등록</h1>
+			<h1 class = "display-3"><fmt:message key="title" /></h1>
 		</div>
 	</div>
 	<div class="container">
-		<form action="./processAddProduct.jsp" name="newProduct" 
+	
+		<div class="text-right">
+			<a href="?language=ko">Korean</a> | <a href="?language=en">English</a>
+		</div>
+	
+		<form name="newProduct" action="./processAddProduct.jsp" 
 			method="post" class="form-horizontal" enctype="multipart/form-data">
 			<div class="form-group row">
-				<label class="col-sm-2"><b>상품 코드</b></label> 
+				<label class="col-sm-2"><fmt:message key="productId" /></label> 
 				<div class="col-sm-3">
 					<input type="text" id="productId" name="productId" class="form-control">
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-sm-2"><b>상품명</b></label>
+				<label class="col-sm-2"><fmt:message key="pname" /></label>
 				<div class="col-sm-2">
 					<input type="text" id="name" name="name" class="form-control">
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-sm-2"><b>가격</b></label>
+				<label class="col-sm-2"><fmt:message key="unitPrice" /></label>
 				<div class="col-sm-3">
 					<input type="text" id="unitPrice" name="unitPrice" class="form-control">
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-sm-2"><b>상세 정보</b></label>
+				<label class="col-sm-2"><fmt:message key="description" /></label>
 				<div class="col-sm-5">
 					<textarea rows="2" cols="50" name="description" class="form-control">
 					</textarea>
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-sm-2"><b>제조사</b></label>
+				<label class="col-sm-2"><fmt:message key="manufacturer" /></label>
 				<div class="col-sm-3">
 					<input type="text" name="manufacturer" class="form-control">
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-sm-2"><b>분류</b></label>
+				<label class="col-sm-2"><fmt:message key="category" /></label>
 				<div class="col-sm-3">
 					<input type="text" name="category" class="form-control">
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-sm-2"><b>재고 수</b></label>
+				<label class="col-sm-2"><fmt:message key="unitsInStock" /></label>
 				<div class="col-sm-3">
 					<input type="text" id="unitsInStock" name="unitsInStock" class="form-control">
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-sm-2"><b>상태</b></label>
+				<label class="col-sm-2"><fmt:message key="condition" /></label>
 				<div class="col-sm-5">
-					<input type="radio" name="condition" value="New"> 신규 제품 
-					<input type="radio" name="condition" value="Old"> 중고 제품 
-					<input type="radio" name="condition" value="Refurbished"> 리퍼 제품
+					<input type="radio" name="condition" value="New"><fmt:message key="condition_New" /> 
+					<input type="radio" name="condition" value="Old"><fmt:message key="condition_Old" /> 
+					<input type="radio" name="condition" value="Refurbished"><fmt:message key="condition_Refurbished" />
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-sm-2"><b>이미지</b></label>
+				<label class="col-sm-2"><fmt:message key="productImage" /></label>
 				<div class="col-sm-5">
 					<input type="file" name="productImage" class="form-control">
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-sm-offset-2 col-sm-10">
-					<input type="submit" value="등록" class="btn btn-primary" onclick="CheckAddProduct()">
-				</label>
+				<div class="col-sm-offset-2 col-sm-10">
+					<input type="button" value="<fmt:message key="button" />" 
+						class="btn btn-primary" onclick="return CheckAddProduct()">
+				</div>
 			</div>
 		</form>	
 	</div>
+	</fmt:bundle>
 	<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>
