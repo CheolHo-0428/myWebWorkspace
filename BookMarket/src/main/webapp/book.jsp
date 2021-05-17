@@ -6,6 +6,7 @@
 <%@ page import="com.oreilly.servlet.multipart.*" %>
 <%@ page import="java.util.*" %>
 <%@ page import="java.io.*" %>
+<%@ page errorPage = "exceptionNoBookId.jsp" %>
 <jsp:useBean id="bookRepo" class="dao.BookRepository" scope="session"></jsp:useBean>
 <!DOCTYPE html>
 <html>

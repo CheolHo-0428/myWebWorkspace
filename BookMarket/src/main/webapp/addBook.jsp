@@ -18,7 +18,7 @@
 
 	<jsp:include page="menu.jsp"></jsp:include>
 	
-		<div class = "jumbotron">
+	<div class = "jumbotron">
 		<div class = "container">
 			<h1 class = "display-3"><fmt:message key="title" /></h1>
 		</div>
@@ -27,6 +27,7 @@
 		
 		<div class="text-right">
 			<a href="?language=ko">Korean</a> | <a href="?language=en">English</a>
+			<a href="logout.jsp" class="btn btn-sm btn-success pull-right">Logout</a>
 		</div>
 	
 		<form action="./processAddBook.jsp" name="bookMember" 

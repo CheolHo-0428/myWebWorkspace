@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import = "dto.Product" %>
 <%@ page import = "dao.ProductRepository" %>
+<%@ page errorPage="exceptionNoProductId.jsp" %>
 <jsp:useBean id="productDAO" class="dao.ProductRepository" scope="session"></jsp:useBean>
 <!DOCTYPE html>
 <html>
@@ -13,7 +14,18 @@
 <!-- Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
     	rel="stylesheet">
-    <link href="./resources/css/bootstrap.min.css" />	
+    <link href="./resources/css/bootstrap.min.css" />
+    
+<script type="text/javascript">
+	function addToCart(){
+		if (confirm("상품을 장바구니에 추가하시겠습니까?")){
+			document.addForm.submit();
+		} else {
+			document.addForm.reset();
+		}
+	}
+</script>    
+    	
 <body>
 	<jsp:include page="menu.jsp"></jsp:include>
 		<div class = "jumbotron">
@@ -42,8 +54,14 @@
 					<p> <b>분류 : </b><%=product.getCategory() %>
 					<p> <b>재고 수 : </b><%=product.getUnitsInStock() %>개
 					<h4><%=product.getUnitPrice() %>원</h4>
-					<p><a href="#" class="btn btn-info">상세 주문 &raquo;</a>
-						<a href="./products.jsp" class="btn btn-secondary">상세 목록 &raquo;</a>
+					<p>
+						<form action="./addCart.jsp?id=<%=product.getProductId()%>" 
+							method="post" name="addForm">
+							<a href="#" class="btn btn-info" onclick="addToCart()">상품 주문 &raquo;</a>
+							<a href="./cart.jsp" class="btn btn-warning">장바구니 &raquo;</a>
+							<a href="./products.jsp" class="btn btn-secondary">상품 목록 &raquo;</a>
+						</form>
+					</p>
 				</div>
 			</div>
 			<hr>
