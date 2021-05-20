@@ -26,8 +26,8 @@ public class MemberServlet extends HttpServlet {
       PrintWriter out=response.getWriter();
       
       //MemberDAO 객체를 생성합니다.
-      MemberDAO dao=new MemberDAO();
-      //MemberDAOP dao=new MemberDAOP();  
+      //MemberDAO dao=new MemberDAO();
+      MemberDAOP dao=new MemberDAOP();  
       
       //MemberDAO.listMembers() 메소드로 회원 정보를 조회합니다.
       List<MemberVO> list=dao.listMembers(); 

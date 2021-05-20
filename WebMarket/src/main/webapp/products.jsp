@@ -3,6 +3,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="dto.Product" %>
 <%@ page import="dao.ProductRepository" %>
+<%@page import="java.sql.*"%>
 <jsp:useBean id="productDAO" class="dao.ProductRepository" scope="session" />
 <!DOCTYPE html>
 <html>
@@ -28,9 +29,24 @@
 	%>
 	<div class="container">
 		<div class="row" align="center">
-			<% for(int i=0; i<listOfProducts.size(); i++){
+		<!--<% for(int i=0; i<listOfProducts.size(); i++){
 				Product product = listOfProducts.get(i);
-			%>
+			%>-->
+			
+			<%@ include file ="dbconn.jsp" %>
+			<% 
+				PreparedStatement pstmt = null;
+				ResultSet rs = null;
+				String sql = "select * from product";
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery(
+						
+						);
+				while (rs.next()){
+			%> <!-- 여기서부터!!!! 556 페이지 -->
+			
+			
+			
 			<div class = "col-md-4">
 				<img src="./resources/images/<%=product.getFilename()%>" 
 					alt="<%=product.getFilename()%>" height="280" width="250"/>
