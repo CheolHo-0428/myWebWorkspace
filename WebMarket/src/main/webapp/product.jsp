@@ -3,6 +3,7 @@
 <%@ page import = "dto.Product" %>
 <%@ page import = "dao.ProductRepository" %>
 <%@ page errorPage="exceptionNoProductId.jsp" %>
+<%@ page import = "java.sql.*" %>
 <jsp:useBean id="productDAO" class="dao.ProductRepository" scope="session"></jsp:useBean>
 <!DOCTYPE html>
 <html>
@@ -39,23 +40,54 @@
 			ProductRepository dao = ProductRepository.getInstance();
 			Product product = dao.getProductByID(id);
 		%>
+		<%@ include file="dbconn.jsp" %>
+		<% 
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = "select * from product where p_id = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			String p_id = "";
+			String p_name = "";
+			int p_unitprice = 0;
+			String p_description = "";
+			String p_category = "";
+			String p_manufacturer= "";
+			Long p_unitsInStock = null;
+			String p_condition = "";
+			String p_fileName = "";
+			
+			while(rs.next()){
+			p_id = rs.getString("p_id");
+			p_name = rs.getString("p_name");
+			p_unitprice = rs.getInt("p_unitprice");
+			p_description = rs.getString("p_description");
+			p_category = rs.getString("p_category");
+			p_manufacturer= rs.getString("p_manufacturer");
+			p_unitsInStock = rs.getLong("p_unitsInStock");
+			p_condition = rs.getString("p_condition");
+			p_fileName = rs.getString("p_fileName");
+			};
+		%>
 		<div class="container">
 			<div class="row">
 				<div class = "col-md-5">
-					<img src="./resources/images/<%=product.getFilename()%>" 
-						alt="<%=product.getFilename()%>" width="100%">
+					<img src="./resources/images/<%=p_fileName%>" 
+						alt="<%=p_fileName%>" width="100%">
 				</div>
 				<div class = "col-md-6">
-					<h3><%= product.getPname()%></h3>
-					<p><%=product.getDescription() %></p>
+					<h3><%= p_name%></h3>
+					<p><%=p_description %></p>
 					<p> <b>상품 코드 : </b><span class="badge badge-danger">
-						<%=product.getProductId()%></span>
-					<p> <b>제조사 : </b><%=product.getManufacturer() %>
-					<p> <b>분류 : </b><%=product.getCategory() %>
-					<p> <b>재고 수 : </b><%=product.getUnitsInStock() %>개
-					<h4><%=product.getUnitPrice() %>원</h4>
+						<%= p_id%></span>
+					<p> <b>제조사 : </b><%= p_manufacturer %>
+					<p> <b>분류 : </b><%= p_category %>
+					<p> <b>재고 수 : </b><%= p_unitsInStock %>개
+					<h4><%= p_unitprice %>원</h4>
 					<p>
-						<form action="./addCart.jsp?id=<%=product.getProductId()%>" 
+						<form action="./addCart.jsp?id=<%= p_id%>" 
 							method="post" name="addForm">
 							<a href="#" class="btn btn-info" onclick="addToCart()">상품 주문 &raquo;</a>
 							<a href="./cart.jsp" class="btn btn-warning">장바구니 &raquo;</a>
@@ -66,7 +98,17 @@
 			</div>
 			<hr>
 		</div>
-	
 	<jsp:include page="footer.jsp"></jsp:include>
+	<% 
+		if(rs != null){
+			rs.close();
+		}
+		if (pstmt != null){
+			pstmt.close();
+		}
+		if(conn != null){
+			conn.close();
+		}
+	%>
 </body>
 </html>

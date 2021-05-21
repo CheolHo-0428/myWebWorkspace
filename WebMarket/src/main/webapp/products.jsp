@@ -3,7 +3,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="dto.Product" %>
 <%@ page import="dao.ProductRepository" %>
-<%@page import="java.sql.*"%>
+<%@ page import="java.sql.*"%>
 <jsp:useBean id="productDAO" class="dao.ProductRepository" scope="session" />
 <!DOCTYPE html>
 <html>
@@ -29,34 +29,35 @@
 	%>
 	<div class="container">
 		<div class="row" align="center">
-		<!--<% for(int i=0; i<listOfProducts.size(); i++){
-				Product product = listOfProducts.get(i);
-			%>-->
-			
+				
 			<%@ include file ="dbconn.jsp" %>
 			<% 
 				PreparedStatement pstmt = null;
 				ResultSet rs = null;
 				String sql = "select * from product";
 				pstmt = conn.prepareStatement(sql);
-				rs = pstmt.executeQuery(
-						
-						);
+				rs = pstmt.executeQuery();
 				while (rs.next()){
-			%> <!-- 여기서부터!!!! 556 페이지 -->
-			
-			
-			
+			%> 
 			<div class = "col-md-4">
-				<img src="./resources/images/<%=product.getFilename()%>" 
-					alt="<%=product.getFilename()%>" height="280" width="250"/>
-				<h3><%= product.getPname()%></h3>
-				<p><%=product.getDescription() %></p>
-				<p><%=product.getUnitPrice() %>원</p>
-				<p><a href="./product.jsp?id=<%=product.getProductId()%>"
+				<img src="./resources/images/<%=rs.getString("p_fileName")%>" 
+					alt="<%=rs.getString("p_fileName")%>" height="280" width="250"/>
+				<h3><%= rs.getString("p_name")%></h3>
+				<p><%= rs.getString("p_description") %></p>
+				<p><%= rs.getString("P_UnitPrice") %>원</p>
+				<p><a href="./product.jsp?id=<%=rs.getString("p_id")%>"
 				class="btn btn-secondary" role = "button">상세 정보 &raquo;></a>
 			</div>
 			<% 
+				}
+				if(rs != null){
+					rs.close();
+				}
+				if (pstmt != null){
+					pstmt.close();
+				}
+				if(conn != null){
+					conn.close();
 				}
 			%>
 		</div>

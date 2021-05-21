@@ -89,9 +89,9 @@
 			<div class="form-group row">
 				<label class="col-sm-2"><fmt:message key="condition" /></label> 
 				<div class="col-sm-5">
-					<input type="radio" name="condition" value="NewBook" checked> <fmt:message key="condition_New" />
-					<input type="radio" name="condition" value="RepairBook"> <fmt:message key="condition_Old" />
-					<input type="radio" name="condition" value="E-Book"> <fmt:message key="condition_Refurbished" />
+					<input type="radio" name="condition" value="신규 도서" checked> <fmt:message key="condition_New" />
+					<input type="radio" name="condition" value="중고 도서"> <fmt:message key="condition_Old" />
+					<input type="radio" name="condition" value="전자 도서"> <fmt:message key="condition_Refurbished" />
 				</div>
 			</div>
 			<div class="form-group row">

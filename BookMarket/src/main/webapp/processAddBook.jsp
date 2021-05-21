@@ -6,6 +6,8 @@
 <%@ page import = "com.oreilly.servlet.multipart.*" %>
 <%@ page import = "java.util.*" %>
 <%@ page import = "java.io.*" %>
+<%@ page import = "java.sql.*" %>
+<%@ include file="dbconn.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,7 +32,7 @@
 		String publisher = multi.getParameter("publisher");
 		String category = multi.getParameter("category");
 		long unitsInStock = Long.valueOf(multi.getParameter("unitsInStock"));
-		long totalPages = Long.valueOf(multi.getParameter("totalPages"));
+		Integer totalPages = Integer.valueOf(multi.getParameter("totalPages"));
 		String releaseDate = multi.getParameter("releaseDate");
 		String condition = multi.getParameter("condition");
 		
@@ -38,24 +40,32 @@
 		String paramName = (String) eumList.nextElement();
 		String fileName = multi.getFilesystemName(paramName);
 		
-		BookRepository dao = BookRepository.getBookRepositroy();
-		Book book = new Book();
-		book.setBookId(bookId);
-		book.setName(name);
-		book.setUnitPrice(unitPrice);
-		book.setAuthor(author);
-		book.setDescription(description);
-		book.setPublisher(publisher);
-		book.setCategory(category);
-		book.setUnitsInStock(unitsInStock);
-		book.setTotalPages(totalPages);
-		book.setReleaseDate(releaseDate);
-		book.setCondition(condition);
-		book.setFilename(fileName);
+		PreparedStatement pstmt = null;
 		
-		dao.addBook(book);
+		String sql = "insert into book values(?,?,?,?,?,?,?,?,?,?,?,?)";
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, bookId);
+		pstmt.setString(2, name);
+		pstmt.setInt(3, unitPrice);
+		pstmt.setString(4, author);
+		pstmt.setString(5, publisher);
+		pstmt.setString(6, description);
+		pstmt.setString(7, category);
+		pstmt.setLong(8, unitsInStock);
+		pstmt.setInt(9, totalPages);
+		pstmt.setString(10, releaseDate);
+		pstmt.setString(11, condition);
+		pstmt.setString(12, fileName);
+		pstmt.executeUpdate();
 		
-		response.sendRedirect("./books.jsp");
+		if(pstmt != null){
+			pstmt.close();
+		}
+		if(conn != null){
+			conn.close();
+		}
+		
+		response.sendRedirect("books.jsp");
 	%>
 </body>
 </html>
