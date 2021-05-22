@@ -20,6 +20,12 @@
 					<li class="nav-item">
 						<a class="nav-link" href="./addBook.jsp">도서 등록</a>
 					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="./editBook.jsp?edit=update">도서 수정</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="./editBook.jsp?edit=delete">도서 삭제</a>
+					</li>
 				</ul>
 			</div>
 		</div>

@@ -52,3 +52,18 @@ function CheckAddProduct(){
 	
 	document.newProduct.submit();
 }
+
+
+function confirm(){
+	var password = document.newMember.password.value;
+	var password_con = document.newMember.password_confirm.value;
+		
+	if(password != password_con){
+		alert("비밀번호가 맞지 않습니다.");
+		password.select();
+		password.focus();
+		return false;
+	}
+	
+	document.newMember.submit()
+}
