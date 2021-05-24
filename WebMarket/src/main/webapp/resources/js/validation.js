@@ -67,3 +67,19 @@ function confirm(){
 	
 	document.newMember.submit()
 }
+
+
+
+function memberConfirm(){
+	var password_1 = document.updateMember.password.value;
+	var password_con_1 = document.updateMember.password_confirm.value;
+		
+	if(password_1 != password_con_1){
+		alert("비밀번호가 맞지 않습니다.");
+		password.select();
+		password.focus();
+		return false;
+	}
+	
+	document.updateMember.submit()
+}
